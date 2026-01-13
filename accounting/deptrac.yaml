@@ -1,0 +1,27 @@
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#i'
+  layers:
+    - name: Core
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\(Account|Entry|AccountCredited|AccountDebited|AccountId|AccountType|EntryId|TransactionId|Money|Entries|AccountRepository|AccountingFacade)
+    - name: Events
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Events\\.*
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Infrastructure\\.*
+  ruleset:
+    Core:
+      - Events
+    Events:
+      - Core
+    Infrastructure:
+      - Core
+      - Events
+  skip_violations: []

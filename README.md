@@ -13,6 +13,21 @@ This repository contains PHP 8.4 ports of various software architecture patterns
 
 ## Archetypes
 
+### [Accounting](accounting)
+
+Double-entry bookkeeping accounting system.
+
+**Features:**
+- Double-entry bookkeeping with balanced transactions
+- Multiple account types (Asset, Liability, Revenue, Expense, Off-Balance)
+- Transaction processing with automatic balance updates
+- Event-driven architecture
+- Clean architecture with Domain, Application, and Infrastructure layers
+
+**Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac
+
+[→ Read more](accounting/README.md)
+
 ### Availability
 
 #### [Simple Availability](availability/simple-availability)
@@ -27,6 +42,19 @@ Lock-based asset availability management pattern.
 **Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac
 
 [→ Read more](availability/simple-availability/README.md)
+
+#### [Timed Availability](availability/timed-availability)
+Advanced time-slot based resource availability management.
+
+**Features:**
+- Time-slot based resource booking
+- Resource blocking and availability checks
+- Calendar integration
+- Event-driven state transitions
+
+**Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac
+
+[→ Read more](availability/timed-availability/README.md)
 
 ## Development
 
@@ -93,8 +121,10 @@ See [CI Documentation](.github/workflows/README.md) for details.
 .
 ├── .github/
 │   └── workflows/          # GitHub Actions CI configuration
+├── accounting/             # Accounting archetype
 ├── availability/           # Availability archetypes
-│   └── simple-availability/
+│   ├── simple-availability/
+│   └── timed-availability/
 └── [future archetypes]/
 ```
 
