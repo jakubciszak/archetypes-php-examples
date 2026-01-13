@@ -46,8 +46,11 @@ final readonly class SlotToSegments
         return (int) ceil($durationInMinutes / $segmentDuration);
     }
 
-    private function calculateEnd(int $segmentDuration, DateTimeImmutable $currentStart, DateTimeImmutable $initialEnd): DateTimeImmutable
-    {
+    private function calculateEnd(
+        int $segmentDuration,
+        DateTimeImmutable $currentStart,
+        DateTimeImmutable $initialEnd
+    ): DateTimeImmutable {
         $segmentEnd = $currentStart->add(new DateInterval(sprintf('PT%dM', $segmentDuration)));
 
         if ($initialEnd < $segmentEnd) {

@@ -23,8 +23,11 @@ final readonly class AvailabilityFacade
         $this->availabilityRepository->saveNew($groupedAvailability);
     }
 
-    public function createResourceSlotsWithParent(ResourceId $resourceId, ResourceId $parentId, TimeSlot $timeslot): void
-    {
+    public function createResourceSlotsWithParent(
+        ResourceId $resourceId,
+        ResourceId $parentId,
+        TimeSlot $timeslot
+    ): void {
         $groupedAvailability = ResourceGroupedAvailability::ofWithParent($resourceId, $timeslot, $parentId);
         $this->availabilityRepository->saveNew($groupedAvailability);
     }
