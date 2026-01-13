@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Events;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\Owner;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
 
 final readonly class ResourceTakenOver implements PublishedEvent
 {

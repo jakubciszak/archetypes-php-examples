@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Domain;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-final readonly class ResourceId
+final readonly class ResourceAvailabilityId
 {
     private function __construct(private ?UuidInterface $id)
     {
@@ -33,7 +33,7 @@ final readonly class ResourceId
         return new self($uuid);
     }
 
-    public function getId(): ?UuidInterface
+    public function id(): ?UuidInterface
     {
         return $this->id;
     }

@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Tests\Domain;
+namespace SoftwareArchetypes\Availability\TimedAvailability\Tests;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\Owner;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceAvailability;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceAvailabilityId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+use SoftwareArchetypes\Availability\TimedAvailability\Owner;
+use SoftwareArchetypes\Availability\TimedAvailability\ResourceAvailability;
+use SoftwareArchetypes\Availability\TimedAvailability\ResourceAvailabilityId;
+use SoftwareArchetypes\Availability\TimedAvailability\ResourceId;
+use SoftwareArchetypes\Availability\TimedAvailability\TimeSlot;
 
 final class ResourceAvailabilityTest extends TestCase
 {

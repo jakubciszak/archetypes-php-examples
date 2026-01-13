@@ -6,7 +6,7 @@ namespace SoftwareArchetypes\Availability\TimedAvailability\Segment;
 
 use DateInterval;
 use DateTimeImmutable;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+use SoftwareArchetypes\Availability\TimedAvailability\TimeSlot;
 
 final readonly class SlotToNormalizedSlot
 {

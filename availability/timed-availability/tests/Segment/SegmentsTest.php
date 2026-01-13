@@ -6,7 +6,7 @@ namespace SoftwareArchetypes\Availability\TimedAvailability\Tests\Segment;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+use SoftwareArchetypes\Availability\TimedAvailability\TimeSlot;
 use SoftwareArchetypes\Availability\TimedAvailability\Segment\SegmentInMinutes;
 use SoftwareArchetypes\Availability\TimedAvailability\Segment\Segments;
 

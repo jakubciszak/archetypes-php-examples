@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Application;
-
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceId;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 final readonly class Calendars
 {

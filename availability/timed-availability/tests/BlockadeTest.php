@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Tests\Domain;
+namespace SoftwareArchetypes\Availability\TimedAvailability\Tests;
 
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\Blockade;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\Owner;
+use SoftwareArchetypes\Availability\TimedAvailability\Blockade;
+use SoftwareArchetypes\Availability\TimedAvailability\Owner;
 
 final class BlockadeTest extends TestCase
 {
