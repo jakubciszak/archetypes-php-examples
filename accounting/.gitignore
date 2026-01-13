@@ -1,4 +1,26 @@
+# Dependencies
 /vendor/
-.phpunit.cache/
-.deptrac.cache
-composer.lock
+
+# Composer lock file
+/composer.lock
+
+# PHPUnit cache
+/.phpunit.cache/
+
+# Deptrac cache
+/.deptrac.cache
+
+# PHPStan cache
+/.phpstan.cache/
+/.phpstan/
+
+# Code coverage reports
+/coverage/
+
+# IDE files
+/.idea/
+/.vscode/
+.DS_Store
+
+# Logs
+*.log
