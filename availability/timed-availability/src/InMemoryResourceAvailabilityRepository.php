@@ -24,9 +24,11 @@ final class InMemoryResourceAvailabilityRepository implements ResourceAvailabili
         $result = [];
 
         foreach ($this->storage as $availability) {
-            if ($availability->resourceId()->equals($resourceId) &&
+            if (
+                $availability->resourceId()->equals($resourceId) &&
                 $availability->segment()->from() >= $segment->from() &&
-                $availability->segment()->to() <= $segment->to()) {
+                $availability->segment()->to() <= $segment->to()
+            ) {
                 $result[] = $availability;
             }
         }
@@ -39,9 +41,11 @@ final class InMemoryResourceAvailabilityRepository implements ResourceAvailabili
         $result = [];
 
         foreach ($this->storage as $availability) {
-            if ($availability->resourceParentId()->equals($parentId) &&
+            if (
+                $availability->resourceParentId()->equals($parentId) &&
                 $availability->segment()->from() >= $segment->from() &&
-                $availability->segment()->to() <= $segment->to()) {
+                $availability->segment()->to() <= $segment->to()
+            ) {
                 $result[] = $availability;
             }
         }
@@ -80,8 +84,10 @@ final class InMemoryResourceAvailabilityRepository implements ResourceAvailabili
         return $this->storage[$key] ?? null;
     }
 
-    public function loadAvailabilitiesOfRandomResourceWithin(array $resourceIds, TimeSlot $normalized): ResourceGroupedAvailability
-    {
+    public function loadAvailabilitiesOfRandomResourceWithin(
+        array $resourceIds,
+        TimeSlot $normalized
+    ): ResourceGroupedAvailability {
         foreach ($resourceIds as $resourceId) {
             $availabilities = $this->loadAllWithinSlot($resourceId, $normalized);
 

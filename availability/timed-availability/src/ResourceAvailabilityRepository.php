@@ -25,5 +25,8 @@ interface ResourceAvailabilityRepository
     /**
      * @param list<ResourceId> $resourceIds
      */
-    public function loadAvailabilitiesOfRandomResourceWithin(array $resourceIds, TimeSlot $normalized): ResourceGroupedAvailability;
+    public function loadAvailabilitiesOfRandomResourceWithin(
+        array $resourceIds,
+        TimeSlot $normalized
+    ): ResourceGroupedAvailability;
 }
