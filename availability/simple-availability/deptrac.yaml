@@ -50,10 +50,3 @@ deptrac:
       - Events
       - Common
   skip_violations: []
-  analyser:
-    types:
-      - class
-      - class_superglobal
-      - file
-      - function
-      - function_superglobal
