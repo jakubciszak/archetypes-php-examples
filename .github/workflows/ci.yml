@@ -18,6 +18,8 @@ jobs:
         context:
           - name: 'Availability/Simple'
             path: 'availability/simple-availability'
+          - name: 'Availability/Timed'
+            path: 'availability/timed-availability'
 
     steps:
       - name: Checkout code
