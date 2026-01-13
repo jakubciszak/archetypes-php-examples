@@ -1,0 +1,44 @@
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#i'
+  layers:
+    - name: Common
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Common\\.*
+    - name: Domain
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Domain\\.*
+    - name: Events
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Events\\.*
+    - name: Application
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Application\\.*
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Accounting\\Infrastructure\\.*
+  ruleset:
+    Common: []
+    Domain:
+      - Common
+      - Events
+    Events:
+      - Domain
+      - Common
+    Application:
+      - Domain
+      - Events
+      - Common
+      - Infrastructure
+    Infrastructure:
+      - Domain
+      - Events
+      - Common
+  skip_violations: []

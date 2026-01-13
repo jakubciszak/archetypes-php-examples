@@ -16,6 +16,8 @@ jobs:
       matrix:
         php: ['8.4']
         context:
+          - name: 'Accounting'
+            path: 'accounting'
           - name: 'Availability/Simple'
             path: 'availability/simple-availability'
           - name: 'Availability/Timed'

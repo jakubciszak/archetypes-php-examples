@@ -1,0 +1,52 @@
+site_name: Deptrac
+site_description: "Deptrac: keep your architecture clean"
+site_url: https://deptrac.github.io/deptrac
+
+repo_name: 'deptrac/deptrac'
+repo_url: 'https://github.com/deptrac/deptrac'
+edit_uri: ''
+
+docs_dir: docs
+
+nav:
+  - Home: index.md
+  - Documentation:
+    - Concepts: concepts.md
+    - Configuration: configuration.md
+    - Collectors: collectors.md
+    - Formatters: formatters.md
+    - Debugging: debugging.md
+    - Backwards Compatibility: bc_policy.md
+    - Extending Deptrac: extending_deptrac.md
+  - Upgrade Guide: upgrade.md
+  - Code of Conduct: CODE_OF_CONDUCT.md
+  - Contributing: CONTRIBUTING.md
+  - Security: SECURITY.md
+  - Blog:
+      - blog.md
+      - 'Dynamic Deptrac configuration with PHP config file': blog/2023-05-11_PHP_configuration.md
+
+theme:
+  name: material
+  logo: deptrac.png
+  extra:
+    homepage: https://open.de
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    primary: indigo
+    accent: blue
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
+    - toc.integrate
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
