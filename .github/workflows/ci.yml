@@ -54,7 +54,7 @@ jobs:
         working-directory: ${{ matrix.context.path }}
 
       - name: Run Deptrac (Architecture Analysis)
-        run: vendor/bin/deptrac analyse --config-file=deptrac.yaml
+        run: vendor/bin/deptrac analyse --config-file=deptrac.yaml --fail-on-uncovered
         working-directory: ${{ matrix.context.path }}
 
       - name: Run PHPUnit (Unit Tests)

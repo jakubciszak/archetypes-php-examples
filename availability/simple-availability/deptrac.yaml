@@ -6,28 +6,28 @@ deptrac:
   layers:
     - name: Common
       collectors:
-        - type: directory
-          value: src/Common/.*
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\SimpleAvailability\\Common\\.*
     - name: Domain
       collectors:
-        - type: directory
-          value: src/Domain/.*
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\SimpleAvailability\\Domain\\.*
     - name: Events
       collectors:
-        - type: directory
-          value: src/Events/.*
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\SimpleAvailability\\Events\\.*
     - name: Commands
       collectors:
-        - type: directory
-          value: src/Commands/.*
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\SimpleAvailability\\Commands\\.*
     - name: Application
       collectors:
-        - type: directory
-          value: src/Application/.*
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\SimpleAvailability\\Application\\.*
     - name: Infrastructure
       collectors:
-        - type: directory
-          value: src/Infrastructure/.*
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\SimpleAvailability\\Infrastructure\\.*
   ruleset:
     Common: []
     Domain:
