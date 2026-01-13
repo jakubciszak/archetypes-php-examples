@@ -1,0 +1,53 @@
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#i'
+  layers:
+    - name: Common
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\TimedAvailability\\Common\\.*
+    - name: Domain
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\TimedAvailability\\Domain\\.*
+    - name: Segment
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\TimedAvailability\\Segment\\.*
+    - name: Events
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\TimedAvailability\\Events\\.*
+    - name: Application
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\TimedAvailability\\Application\\.*
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Availability\\TimedAvailability\\Infrastructure\\.*
+  ruleset:
+    Common: []
+    Domain:
+      - Common
+      - Events
+      - Segment
+    Segment:
+      - Domain
+      - Common
+    Events:
+      - Domain
+      - Common
+    Application:
+      - Domain
+      - Events
+      - Segment
+      - Common
+    Infrastructure:
+      - Domain
+      - Events
+      - Common
+      - Application
+  skip_violations: []

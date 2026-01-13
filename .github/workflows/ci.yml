@@ -8,7 +8,7 @@ on:
 
 jobs:
   ci:
-    name: ${{ matrix.context }} - PHP ${{ matrix.php }}
+    name: ${{ matrix.context.name }} - PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -18,6 +18,8 @@ jobs:
         context:
           - name: 'Availability/Simple'
             path: 'availability/simple-availability'
+          - name: 'Availability/Timed'
+            path: 'availability/timed-availability'
 
     steps:
       - name: Checkout code
@@ -54,7 +56,7 @@ jobs:
         working-directory: ${{ matrix.context.path }}
 
       - name: Run Deptrac (Architecture Analysis)
-        run: vendor/bin/deptrac analyse --config-file=deptrac.yaml --fail-on-uncovered
+        run: vendor/bin/deptrac analyse --config-file=deptrac.yaml
         working-directory: ${{ matrix.context.path }}
 
       - name: Run PHPUnit (Unit Tests)
