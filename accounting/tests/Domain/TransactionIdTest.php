@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SoftwareArchetypes\Accounting\Tests\Domain;
 
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Accounting\Domain\TransactionId;
+use SoftwareArchetypes\Accounting\TransactionId;
 
 class TransactionIdTest extends TestCase
 {

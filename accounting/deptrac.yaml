@@ -4,41 +4,24 @@ deptrac:
   exclude_files:
     - '#.*test.*#i'
   layers:
-    - name: Common
+    - name: Core
       collectors:
         - type: classLike
-          value: SoftwareArchetypes\\Accounting\\Common\\.*
-    - name: Domain
-      collectors:
-        - type: classLike
-          value: SoftwareArchetypes\\Accounting\\Domain\\.*
+          value: SoftwareArchetypes\\Accounting\\(Account|Entry|AccountCredited|AccountDebited|AccountId|AccountType|EntryId|TransactionId|Money|Entries|AccountRepository|AccountingFacade)
     - name: Events
       collectors:
         - type: classLike
           value: SoftwareArchetypes\\Accounting\\Events\\.*
-    - name: Application
-      collectors:
-        - type: classLike
-          value: SoftwareArchetypes\\Accounting\\Application\\.*
     - name: Infrastructure
       collectors:
         - type: classLike
           value: SoftwareArchetypes\\Accounting\\Infrastructure\\.*
   ruleset:
-    Common: []
-    Domain:
-      - Common
+    Core:
       - Events
     Events:
-      - Domain
-      - Common
-    Application:
-      - Domain
-      - Events
-      - Common
-      - Infrastructure
+      - Core
     Infrastructure:
-      - Domain
+      - Core
       - Events
-      - Common
   skip_violations: []

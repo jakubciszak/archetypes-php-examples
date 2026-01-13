@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting\Domain;
+namespace SoftwareArchetypes\Accounting;
 
 use DateTimeImmutable;
-use SoftwareArchetypes\Accounting\Common\Money;
+use SoftwareArchetypes\Accounting\Money;
 
 interface Entry
 {

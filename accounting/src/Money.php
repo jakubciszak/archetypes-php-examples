@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting\Common;
+namespace SoftwareArchetypes\Accounting;
 
 final readonly class Money
 {

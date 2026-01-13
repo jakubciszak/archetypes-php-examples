@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting\Domain;
+namespace SoftwareArchetypes\Accounting;
 
-use SoftwareArchetypes\Accounting\Common\Money;
 use SoftwareArchetypes\Accounting\Events\AccountingEvent;
 use SoftwareArchetypes\Accounting\Events\CreditEntryRegistered;
 use SoftwareArchetypes\Accounting\Events\DebitEntryRegistered;

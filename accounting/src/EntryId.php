@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting\Domain;
+namespace SoftwareArchetypes\Accounting;
 
 use InvalidArgumentException;
 
-final readonly class TransactionId
+final readonly class EntryId
 {
     private function __construct(
         private string $value,
     ) {
         if ($value === '') {
-            throw new InvalidArgumentException('Transaction ID cannot be empty');
+            throw new InvalidArgumentException('Entry ID cannot be empty');
         }
     }
 
@@ -23,7 +23,7 @@ final readonly class TransactionId
 
     public static function generate(): self
     {
-        return new self(uniqid('txn_', true));
+        return new self(uniqid('entry_', true));
     }
 
     public function toString(): string

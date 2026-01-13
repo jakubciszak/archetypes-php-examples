@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting\Application;
-
-use SoftwareArchetypes\Accounting\Domain\Account;
-use SoftwareArchetypes\Accounting\Domain\AccountId;
+namespace SoftwareArchetypes\Accounting;
 
 interface AccountRepository
 {

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting\Domain;
+namespace SoftwareArchetypes\Accounting;
 
 enum AccountType
 {

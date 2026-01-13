@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace SoftwareArchetypes\Accounting\Events;
 
 use DateTimeImmutable;
-use SoftwareArchetypes\Accounting\Common\Money;
-use SoftwareArchetypes\Accounting\Domain\AccountId;
-use SoftwareArchetypes\Accounting\Domain\EntryId;
-use SoftwareArchetypes\Accounting\Domain\TransactionId;
+use SoftwareArchetypes\Accounting\Money;
+use SoftwareArchetypes\Accounting\AccountId;
+use SoftwareArchetypes\Accounting\EntryId;
+use SoftwareArchetypes\Accounting\TransactionId;
 
 final readonly class CreditEntryRegistered implements AccountingEvent
 {

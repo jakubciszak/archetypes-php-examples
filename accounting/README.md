@@ -93,33 +93,35 @@ echo "Balance: " . $balance->amount();
 
 ## Architecture
 
-### Layers
+This implementation follows the **flat package structure** from the original Java accounting archetype, maintaining consistency with the source architecture.
+
+### Package Structure
 
 ```
-┌─────────────────────────────────────┐
-│         Application                 │  AccountingFacade
-│  (Use cases, orchestration)         │
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│           Domain                    │  Account, Entry, Events
-│  (Business logic, entities)         │  AccountRepository interface
-└─────────────────────────────────────┘
-              ↓
-┌─────────────────────────────────────┐
-│       Infrastructure                │  InMemoryAccountRepository
-│  (Technical implementations)        │  InMemoryEventsPublisher
-└─────────────────────────────────────┘
+SoftwareArchetypes\Accounting\
+├── Core classes (main namespace)
+│   ├── Account, Entry, AccountCredited, AccountDebited
+│   ├── AccountId, TransactionId, EntryId
+│   ├── Money, AccountType, Entries
+│   ├── AccountRepository, AccountingFacade
+│
+├── Events\
+│   ├── AccountingEvent
+│   ├── DebitEntryRegistered
+│   └── CreditEntryRegistered
+│
+└── Infrastructure\
+    ├── InMemoryAccountRepository
+    └── InMemoryEventsPublisher
 ```
 
 ### Dependency Rules
 
-- **Domain** - No dependencies (core business logic)
-- **Events** - Depends on Domain
-- **Application** - Depends on Domain, Events, Infrastructure
-- **Infrastructure** - Depends on Domain, Events
+- **Core** - Can depend on Events (for publishing domain events)
+- **Events** - Can depend on Core (references domain value objects)
+- **Infrastructure** - Can depend on Core and Events (implements interfaces)
 
-These rules are enforced by Deptrac architecture validation.
+These rules are enforced by Deptrac architecture validation using `classLike` collectors.
 
 ## Testing
 

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace SoftwareArchetypes\Accounting\Tests\Common;
 
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Accounting\Common\Money;
+use SoftwareArchetypes\Accounting\Money;
 
 class MoneyTest extends TestCase
 {

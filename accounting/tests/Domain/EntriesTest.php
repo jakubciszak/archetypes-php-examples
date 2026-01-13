@@ -6,13 +6,13 @@ namespace SoftwareArchetypes\Accounting\Tests\Domain;
 
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Accounting\Common\Money;
-use SoftwareArchetypes\Accounting\Domain\AccountCredited;
-use SoftwareArchetypes\Accounting\Domain\AccountDebited;
-use SoftwareArchetypes\Accounting\Domain\AccountId;
-use SoftwareArchetypes\Accounting\Domain\Entries;
-use SoftwareArchetypes\Accounting\Domain\EntryId;
-use SoftwareArchetypes\Accounting\Domain\TransactionId;
+use SoftwareArchetypes\Accounting\Money;
+use SoftwareArchetypes\Accounting\AccountCredited;
+use SoftwareArchetypes\Accounting\AccountDebited;
+use SoftwareArchetypes\Accounting\AccountId;
+use SoftwareArchetypes\Accounting\Entries;
+use SoftwareArchetypes\Accounting\EntryId;
+use SoftwareArchetypes\Accounting\TransactionId;
 
 class EntriesTest extends TestCase
 {

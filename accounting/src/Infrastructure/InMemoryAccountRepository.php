@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Accounting\Infrastructure;
 
-use SoftwareArchetypes\Accounting\Domain\AccountRepository;
-use SoftwareArchetypes\Accounting\Domain\Account;
-use SoftwareArchetypes\Accounting\Domain\AccountId;
+use SoftwareArchetypes\Accounting\AccountRepository;
+use SoftwareArchetypes\Accounting\Account;
+use SoftwareArchetypes\Accounting\AccountId;
 
 final class InMemoryAccountRepository implements AccountRepository
 {
