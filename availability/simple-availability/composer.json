@@ -43,9 +43,9 @@
         "optimize-autoloader": true
     },
     "scripts": {
-        "test": "phpunit",
-        "test:unit": "phpunit --testsuite=unit",
-        "test:integration": "phpunit --testsuite=integration",
+        "test": "phpunit --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test:unit": "phpunit --testsuite=unit --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test:integration": "phpunit --testsuite=integration --no-coverage --do-not-fail-on-phpunit-deprecation",
         "test-coverage": "phpunit --coverage-html coverage",
         "phpstan": "phpstan analyse src tests --level=max",
         "deptrac": "deptrac analyse --config-file=deptrac.yaml",

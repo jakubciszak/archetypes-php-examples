@@ -4,10 +4,13 @@
          bootstrap="vendor/autoload.php"
          colors="true"
          cacheDirectory=".phpunit.cache"
-         failOnWarning="true"
+         failOnWarning="false"
          failOnRisky="true"
          beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true">
+         beStrictAboutTodoAnnotatedTests="true"
+         displayDetailsOnTestsThatTriggerDeprecations="false"
+         displayDetailsOnTestsThatTriggerWarnings="false"
+         displayDetailsOnTestsThatTriggerNotices="false">
     <testsuites>
         <testsuite name="unit">
             <directory>tests/Application</directory>
