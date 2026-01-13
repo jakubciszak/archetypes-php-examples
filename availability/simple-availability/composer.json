@@ -44,9 +44,18 @@
     },
     "scripts": {
         "test": "phpunit",
+        "test:unit": "phpunit --testsuite=unit",
+        "test:integration": "phpunit --testsuite=integration",
         "test-coverage": "phpunit --coverage-html coverage",
         "phpstan": "phpstan analyse src tests --level=max",
+        "deptrac": "deptrac analyse --config-file=deptrac.yaml",
         "cs-fix": "php-cs-fixer fix",
-        "cs-check": "php-cs-fixer fix --dry-run --diff"
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "ci": [
+            "@phpstan",
+            "@deptrac",
+            "@test:unit",
+            "@test:integration"
+        ]
     }
 }
