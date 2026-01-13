@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Domain;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 use SoftwareArchetypes\Availability\TimedAvailability\Segment\SegmentInMinutes;
 use SoftwareArchetypes\Availability\TimedAvailability\Segment\Segments;

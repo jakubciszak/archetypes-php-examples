@@ -2,14 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Infrastructure;
-
-use SoftwareArchetypes\Availability\TimedAvailability\Application\ResourceAvailabilityRepository;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceAvailability;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceAvailabilityId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceGroupedAvailability;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 final class InMemoryResourceAvailabilityRepository implements ResourceAvailabilityRepository
 {

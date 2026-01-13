@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Domain;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;

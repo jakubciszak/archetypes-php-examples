@@ -2,15 +2,8 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Application;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
-use SoftwareArchetypes\Availability\TimedAvailability\Common\Clock;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\Owner;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceGroupedAvailability;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
-use SoftwareArchetypes\Availability\TimedAvailability\Events\EventsPublisher;
-use SoftwareArchetypes\Availability\TimedAvailability\Events\ResourceTakenOver;
 use SoftwareArchetypes\Availability\TimedAvailability\Segment\SegmentInMinutes;
 use SoftwareArchetypes\Availability\TimedAvailability\Segment\Segments;
 

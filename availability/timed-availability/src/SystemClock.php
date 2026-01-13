@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Common;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 use DateTimeImmutable;
 

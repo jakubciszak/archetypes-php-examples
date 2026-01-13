@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Availability\TimedAvailability\Segment;
 
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+use SoftwareArchetypes\Availability\TimedAvailability\TimeSlot;
 
 final class Segments
 {

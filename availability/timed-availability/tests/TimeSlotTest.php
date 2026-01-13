@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Tests\Domain;
+namespace SoftwareArchetypes\Availability\TimedAvailability\Tests;
 
 use DateInterval;
 use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+use SoftwareArchetypes\Availability\TimedAvailability\TimeSlot;
 
 final class TimeSlotTest extends TestCase
 {

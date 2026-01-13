@@ -2,13 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Application;
-
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceAvailability;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceAvailabilityId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceGroupedAvailability;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\ResourceId;
-use SoftwareArchetypes\Availability\TimedAvailability\Domain\TimeSlot;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 interface ResourceAvailabilityRepository
 {

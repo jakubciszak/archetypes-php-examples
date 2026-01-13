@@ -2,10 +2,7 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Availability\TimedAvailability\Infrastructure;
-
-use SoftwareArchetypes\Availability\TimedAvailability\Events\EventsPublisher;
-use SoftwareArchetypes\Availability\TimedAvailability\Events\PublishedEvent;
+namespace SoftwareArchetypes\Availability\TimedAvailability;
 
 final class InMemoryEventsPublisher implements EventsPublisher
 {
