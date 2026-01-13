@@ -56,7 +56,6 @@ jobs:
       - name: Run Deptrac (Architecture Analysis)
         run: vendor/bin/deptrac analyse --config-file=deptrac.yaml --fail-on-uncovered
         working-directory: ${{ matrix.context.path }}
-        continue-on-error: true
 
       - name: Run PHPUnit (Unit Tests)
         run: vendor/bin/phpunit --testsuite=unit --testdox --no-coverage --do-not-fail-on-phpunit-deprecation
