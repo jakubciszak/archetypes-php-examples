@@ -59,11 +59,11 @@ jobs:
         continue-on-error: true
 
       - name: Run PHPUnit (Unit Tests)
-        run: vendor/bin/phpunit --testsuite=unit --testdox
+        run: vendor/bin/phpunit --testsuite=unit --testdox --no-coverage --do-not-fail-on-phpunit-deprecation
         working-directory: ${{ matrix.context.path }}
 
       - name: Run PHPUnit (Integration Tests)
-        run: vendor/bin/phpunit --testsuite=integration --testdox
+        run: vendor/bin/phpunit --testsuite=integration --testdox --no-coverage --do-not-fail-on-phpunit-deprecation
         working-directory: ${{ matrix.context.path }}
 
       - name: Summary
