@@ -13,11 +13,8 @@
          displayDetailsOnTestsThatTriggerNotices="false">
     <testsuites>
         <testsuite name="unit">
-            <directory>tests/Application</directory>
-            <directory>tests/Common</directory>
             <directory>tests/Domain</directory>
             <directory>tests/Segment</directory>
-            <exclude>tests/Integration</exclude>
         </testsuite>
         <testsuite name="integration">
             <directory>tests/Integration</directory>
