@@ -1,0 +1,67 @@
+{
+    "name": "software-archetypes/party",
+    "description": "Party pattern implementation in PHP - Port from Software Archetypes Java project",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "ddd",
+        "domain-driven-design",
+        "party",
+        "software-archetypes",
+        "aggregate",
+        "event-sourcing",
+        "person",
+        "organization"
+    ],
+    "authors": [
+        {
+            "name": "Software Archetypes PHP",
+            "email": "info@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "ramsey/uuid": "^4.7"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^3.0",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0",
+        "squizlabs/php_codesniffer": "^3.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "SoftwareArchetypes\\Party\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SoftwareArchetypes\\Party\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "scripts": {
+        "test": "phpunit --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test:unit": "phpunit --testsuite=unit --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test:integration": "phpunit --testsuite=integration --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "phpcs": "phpcs --standard=../.dev/phpcs.xml src tests",
+        "phpcs-fix": "phpcbf --standard=../.dev/phpcs.xml src tests",
+        "phpstan": "phpstan analyse src tests --level=7",
+        "deptrac": "deptrac analyse --config-file=deptrac.yaml",
+        "cs-fix": "php-cs-fixer fix",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "ci": [
+            "@phpcs",
+            "@deptrac",
+            "@test:unit",
+            "@test:integration"
+        ]
+    }
+}
