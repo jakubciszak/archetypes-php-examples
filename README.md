@@ -56,6 +56,22 @@ Advanced time-slot based resource availability management.
 
 [→ Read more](availability/timed-availability/README.md)
 
+### [Party](party)
+
+Flexible entity modeling pattern for managing persons and organizations with dynamic roles.
+
+**Features:**
+- Universal representation for persons and organizations
+- Dynamic role management (Customer, Supplier, Partner, etc.)
+- Registered identifiers support (tax numbers, passports)
+- Event-driven architecture
+- Result monad for functional error handling
+- Optimistic locking support
+
+**Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac
+
+[→ Read more](party/README.md)
+
 ## Development
 
 ### Requirements
@@ -125,6 +141,7 @@ See [CI Documentation](.github/workflows/README.md) for details.
 ├── availability/           # Availability archetypes
 │   ├── simple-availability/
 │   └── timed-availability/
+├── party/                  # Party archetype
 └── [future archetypes]/
 ```
 
