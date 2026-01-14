@@ -1,0 +1,27 @@
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#i'
+  layers:
+    - name: Core
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Quantity\\(Quantity|Unit)
+    - name: Money
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Quantity\\Money\\.*
+    - name: Common
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Quantity\\Common\\.*
+  ruleset:
+    Core:
+      - Common
+    Money:
+      - Core
+      - Common
+    Common:
+      []
+  skip_violations: []
