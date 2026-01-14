@@ -23,7 +23,7 @@ final class ResourceAvailabilityTest extends TestCase
             new DateTimeImmutable('2024-01-15 11:00:00')
         );
 
-        $availability = new ResourceAvailability($id, $resourceId, $slot);
+        $availability = ResourceAvailability::withoutParent($id, $resourceId, $slot);
 
         self::assertTrue($availability->id()->equals($id));
         self::assertTrue($availability->resourceId()->equals($resourceId));
@@ -186,14 +186,14 @@ final class ResourceAvailabilityTest extends TestCase
             new DateTimeImmutable('2024-01-15 11:00:00')
         );
 
-        $availability = new ResourceAvailability($id, $resourceId, $parentId, $slot);
+        $availability = ResourceAvailability::withParent($id, $resourceId, $parentId, $slot);
 
         self::assertTrue($availability->resourceParentId()->equals($parentId));
     }
 
     private function createAvailableResource(): ResourceAvailability
     {
-        return new ResourceAvailability(
+        return ResourceAvailability::withoutParent(
             ResourceAvailabilityId::newOne(),
             ResourceId::newOne(),
             new TimeSlot(

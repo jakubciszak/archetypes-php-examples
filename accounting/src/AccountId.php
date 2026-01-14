@@ -23,7 +23,7 @@ final readonly class AccountId
 
     public static function generate(): self
     {
-        return new self(uniqid('acc_', true));
+        return new self('acc_' . bin2hex(random_bytes(16)));
     }
 
     public function toString(): string

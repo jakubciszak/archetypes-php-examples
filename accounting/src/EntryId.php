@@ -23,7 +23,7 @@ final readonly class EntryId
 
     public static function generate(): self
     {
-        return new self(uniqid('entry_', true));
+        return new self('entry_' . bin2hex(random_bytes(16)));
     }
 
     public function toString(): string

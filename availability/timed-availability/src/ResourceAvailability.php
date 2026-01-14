@@ -11,26 +11,38 @@ final class ResourceAvailability
     private ResourceId $resourceParentId;
     private TimeSlot $segment;
 
-    public function __construct(
+    private function __construct(
         private readonly ResourceAvailabilityId $id,
         private readonly ResourceId $resourceId,
-        ResourceId|TimeSlot $resourceParentIdOrSegment,
-        ?TimeSlot $segmentParam = null
+        ResourceId $resourceParentId,
+        TimeSlot $segment
     ) {
-        // Handle two constructor signatures:
-        // 1. (id, resourceId, segment)
-        // 2. (id, resourceId, parentId, segment)
-        if ($resourceParentIdOrSegment instanceof TimeSlot) {
-            // Signature 1: (id, resourceId, segment)
-            $this->segment = $resourceParentIdOrSegment;
-            $this->resourceParentId = ResourceId::none();
-        } else {
-            // Signature 2: (id, resourceId, parentId, segment)
-            $this->resourceParentId = $resourceParentIdOrSegment;
-            $this->segment = $segmentParam ?? TimeSlot::empty();
-        }
-
+        $this->resourceParentId = $resourceParentId;
+        $this->segment = $segment;
         $this->blockade = Blockade::none();
+    }
+
+    /**
+     * Creates a ResourceAvailability without a parent resource.
+     */
+    public static function withoutParent(
+        ResourceAvailabilityId $id,
+        ResourceId $resourceId,
+        TimeSlot $segment
+    ): self {
+        return new self($id, $resourceId, ResourceId::none(), $segment);
+    }
+
+    /**
+     * Creates a ResourceAvailability with a parent resource.
+     */
+    public static function withParent(
+        ResourceAvailabilityId $id,
+        ResourceId $resourceId,
+        ResourceId $parentId,
+        TimeSlot $segment
+    ): self {
+        return new self($id, $resourceId, $parentId, $segment);
     }
 
     public static function withVersion(

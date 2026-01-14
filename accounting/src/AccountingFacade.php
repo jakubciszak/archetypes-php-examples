@@ -15,6 +15,8 @@ use SoftwareArchetypes\Accounting\EntryId;
 use SoftwareArchetypes\Accounting\TransactionId;
 use SoftwareArchetypes\Accounting\AccountRepository;
 use SoftwareArchetypes\Accounting\Events\EventsPublisher;
+use SoftwareArchetypes\Accounting\Exceptions\AccountNotFoundException;
+use SoftwareArchetypes\Accounting\Exceptions\InvalidTransferException;
 
 final readonly class AccountingFacade
 {
@@ -55,6 +57,9 @@ final readonly class AccountingFacade
 
     /**
      * Execute a simple transfer between two accounts
+     *
+     * @throws InvalidTransferException if amount is not positive or accounts are the same
+     * @throws AccountNotFoundException if either account does not exist
      */
     public function transfer(
         AccountId $fromAccountId,
@@ -62,11 +67,25 @@ final readonly class AccountingFacade
         Money $amount,
         DateTimeImmutable $occurredAt,
     ): void {
+        // Validate transfer amount
+        if ($amount->isNegative() || $amount->isZero()) {
+            throw InvalidTransferException::amountMustBePositive();
+        }
+
+        // Validate accounts are different
+        if ($fromAccountId->equals($toAccountId)) {
+            throw InvalidTransferException::cannotTransferToSameAccount();
+        }
+
         $fromAccount = $this->accountRepository->find($fromAccountId);
         $toAccount = $this->accountRepository->find($toAccountId);
 
-        if ($fromAccount === null || $toAccount === null) {
-            throw new \RuntimeException('Account not found');
+        if ($fromAccount === null) {
+            throw AccountNotFoundException::forId($fromAccountId->toString());
+        }
+
+        if ($toAccount === null) {
+            throw AccountNotFoundException::forId($toAccountId->toString());
         }
 
         $transactionId = TransactionId::generate();

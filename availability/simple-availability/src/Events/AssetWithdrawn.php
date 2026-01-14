@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Availability\SimpleAvailability\Events;
 
+use DateTimeImmutable;
 use SoftwareArchetypes\Availability\SimpleAvailability\Domain\AssetId;
 
 final readonly class AssetWithdrawn extends BaseDomainEvent
@@ -12,7 +13,7 @@ final readonly class AssetWithdrawn extends BaseDomainEvent
 
     private function __construct(
         string $id,
-        \DateTimeImmutable $occurredAt,
+        DateTimeImmutable $occurredAt,
         private AssetId $assetId
     ) {
         parent::__construct($id, $occurredAt);

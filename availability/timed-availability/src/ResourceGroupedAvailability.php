@@ -19,7 +19,7 @@ final readonly class ResourceGroupedAvailability
     public static function of(ResourceId $resourceId, TimeSlot $timeslot): self
     {
         $resourceAvailabilities = array_map(
-            fn(TimeSlot $segment) => new ResourceAvailability(
+            fn(TimeSlot $segment) => ResourceAvailability::withoutParent(
                 ResourceAvailabilityId::newOne(),
                 $resourceId,
                 $segment
@@ -33,7 +33,7 @@ final readonly class ResourceGroupedAvailability
     public static function ofWithParent(ResourceId $resourceId, TimeSlot $timeslot, ResourceId $parentId): self
     {
         $resourceAvailabilities = array_map(
-            fn(TimeSlot $segment) => new ResourceAvailability(
+            fn(TimeSlot $segment) => ResourceAvailability::withParent(
                 ResourceAvailabilityId::newOne(),
                 $resourceId,
                 $parentId,
