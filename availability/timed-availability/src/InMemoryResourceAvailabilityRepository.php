@@ -112,7 +112,23 @@ final class InMemoryResourceAvailabilityRepository implements
     public function load(ResourceId $resourceId, TimeSlot $timeSlot): Calendar
     {
         $availabilities = $this->loadAllWithinSlot($resourceId, $timeSlot);
-        return new Calendar($resourceId, $availabilities);
+
+        // Group time slots by owner
+        /** @var array<string, list<TimeSlot>> $slotsByOwner */
+        $slotsByOwner = [];
+
+        foreach ($availabilities as $availability) {
+            $owner = $availability->blockedBy();
+            $key = $owner->byNone() ? 'none' : ($owner->id()?->toString() ?? 'none');
+
+            if (!isset($slotsByOwner[$key])) {
+                $slotsByOwner[$key] = [];
+            }
+
+            $slotsByOwner[$key][] = $availability->segment();
+        }
+
+        return new Calendar($resourceId, $slotsByOwner);
     }
 
     /**
@@ -122,9 +138,8 @@ final class InMemoryResourceAvailabilityRepository implements
     {
         $calendars = [];
         foreach ($resourceIds as $resourceId) {
-            $availabilities = $this->loadAllWithinSlot($resourceId, $timeSlot);
-            $calendars[] = new Calendar($resourceId, $availabilities);
+            $calendars[] = $this->load($resourceId, $timeSlot);
         }
-        return new Calendars($calendars);
+        return Calendars::of($calendars);
     }
 }
