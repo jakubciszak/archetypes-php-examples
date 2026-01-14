@@ -53,12 +53,13 @@
         "test-coverage": "phpunit --coverage-html coverage",
         "phpcs": "phpcs --standard=../.dev/phpcs.xml src tests",
         "phpcs-fix": "phpcbf --standard=../.dev/phpcs.xml src tests",
-        "phpstan": "phpstan analyse src tests --level=7",
+        "phpstan": "phpstan analyse",
         "deptrac": "deptrac analyse --config-file=deptrac.yaml",
         "cs-fix": "php-cs-fixer fix",
         "cs-check": "php-cs-fixer fix --dry-run --diff",
         "ci": [
             "@phpcs",
+            "@phpstan",
             "@deptrac",
             "@test:unit",
             "@test:integration"

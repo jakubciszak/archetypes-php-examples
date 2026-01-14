@@ -19,7 +19,7 @@ final class PartiesFacade
     /**
      * @param array<Role> $roles
      * @param array<RegisteredIdentifier> $registeredIdentifiers
-     * @return Result<mixed, Person>
+     * @return Result<string, Person>
      */
     public function registerPerson(
         PersonalData $personalData,
@@ -47,7 +47,7 @@ final class PartiesFacade
     /**
      * @param array<Role> $roles
      * @param array<RegisteredIdentifier> $registeredIdentifiers
-     * @return Result<mixed, Company>
+     * @return Result<string, Company>
      */
     public function registerCompany(
         OrganizationName $organizationName,
@@ -73,7 +73,7 @@ final class PartiesFacade
     }
 
     /**
-     * @return Result<mixed, Party>
+     * @return Result<string|Events\RoleAdditionSkipped, Party>
      */
     public function addRole(PartyId $partyId, Role $role): Result
     {
@@ -94,7 +94,7 @@ final class PartiesFacade
     }
 
     /**
-     * @return Result<mixed, Party>
+     * @return Result<string|Events\RoleRemovalSkipped, Party>
      */
     public function removeRole(PartyId $partyId, Role $role): Result
     {
@@ -115,7 +115,7 @@ final class PartiesFacade
     }
 
     /**
-     * @return Result<mixed, Party>
+     * @return Result<string|Events\RegisteredIdentifierAdditionSkipped, Party>
      */
     public function addIdentifier(PartyId $partyId, RegisteredIdentifier $identifier): Result
     {
@@ -136,7 +136,7 @@ final class PartiesFacade
     }
 
     /**
-     * @return Result<mixed, Party>
+     * @return Result<string|Events\RegisteredIdentifierRemovalSkipped, Party>
      */
     public function removeIdentifier(PartyId $partyId, RegisteredIdentifier $identifier): Result
     {
@@ -157,7 +157,7 @@ final class PartiesFacade
     }
 
     /**
-     * @return Result<mixed, Person>
+     * @return Result<string|Events\PersonalDataUpdateSkipped, Person>
      */
     public function updatePersonalData(PartyId $partyId, PersonalData $personalData): Result
     {
@@ -178,7 +178,7 @@ final class PartiesFacade
     }
 
     /**
-     * @return Result<mixed, Organization>
+     * @return Result<string|Events\OrganizationNameUpdateSkipped, Organization>
      */
     public function updateOrganizationName(PartyId $partyId, OrganizationName $organizationName): Result
     {

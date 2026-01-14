@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace SoftwareArchetypes\Party\Common;
 
 /**
- * @template F
- * @template S
+ * @template-covariant F
+ * @template-covariant S
  */
 final readonly class Result
 {
