@@ -1,0 +1,109 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\Organization\:\:update\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\OrganizationNameUpdateSkipped, static\(SoftwareArchetypes\\Party\\Organization\)\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, \$this\(SoftwareArchetypes\\Party\\Organization\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Organization.php
+
+		-
+			message: '#^Instanceof between SoftwareArchetypes\\Party\\Organization and SoftwareArchetypes\\Party\\Organization will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Instanceof between SoftwareArchetypes\\Party\\Person and SoftwareArchetypes\\Party\\Person will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:addIdentifier\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RegisteredIdentifierAdditionSkipped\|string, SoftwareArchetypes\\Party\\Party\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:addRole\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RoleAdditionSkipped\|string, SoftwareArchetypes\\Party\\Party\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:registerCompany\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<string, SoftwareArchetypes\\Party\\Company\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, SoftwareArchetypes\\Party\\Company\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:registerCompany\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<string, SoftwareArchetypes\\Party\\Company\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:registerPerson\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<string, SoftwareArchetypes\\Party\\Person\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, SoftwareArchetypes\\Party\\Person\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:registerPerson\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<string, SoftwareArchetypes\\Party\\Person\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:removeIdentifier\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RegisteredIdentifierRemovalSkipped\|string, SoftwareArchetypes\\Party\\Party\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:removeRole\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RoleRemovalSkipped\|string, SoftwareArchetypes\\Party\\Party\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:updateOrganizationName\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\OrganizationNameUpdateSkipped\|string, SoftwareArchetypes\\Party\\Organization\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\PartiesFacade\:\:updatePersonalData\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\PersonalDataUpdateSkipped\|string, SoftwareArchetypes\\Party\\Person\> but returns SoftwareArchetypes\\Party\\Common\\Result\<string, null\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/PartiesFacade.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\Party\:\:addIdentifier\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RegisteredIdentifierAdditionSkipped, static\(SoftwareArchetypes\\Party\\Party\)\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, \$this\(SoftwareArchetypes\\Party\\Party\)\>\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Party.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\Party\:\:addRole\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RoleAdditionSkipped, static\(SoftwareArchetypes\\Party\\Party\)\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, \$this\(SoftwareArchetypes\\Party\\Party\)\>\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Party.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\Party\:\:removeIdentifier\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RegisteredIdentifierRemovalSkipped, static\(SoftwareArchetypes\\Party\\Party\)\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, \$this\(SoftwareArchetypes\\Party\\Party\)\>\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Party.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\Party\:\:removeRole\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\RoleRemovalSkipped, static\(SoftwareArchetypes\\Party\\Party\)\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, \$this\(SoftwareArchetypes\\Party\\Party\)\>\.$#'
+			identifier: return.type
+			count: 2
+			path: src/Party.php
+
+		-
+			message: '#^Method SoftwareArchetypes\\Party\\Person\:\:update\(\) should return SoftwareArchetypes\\Party\\Common\\Result\<SoftwareArchetypes\\Party\\Events\\PersonalDataUpdateSkipped, SoftwareArchetypes\\Party\\Person\> but returns SoftwareArchetypes\\Party\\Common\\Result\<null, \$this\(SoftwareArchetypes\\Party\\Person\)\>\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Person.php

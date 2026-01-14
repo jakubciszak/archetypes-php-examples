@@ -22,6 +22,8 @@ jobs:
             path: 'availability/simple-availability'
           - name: 'Availability/Timed'
             path: 'availability/timed-availability'
+          - name: 'Party'
+            path: 'party'
 
     steps:
       - name: Checkout code
