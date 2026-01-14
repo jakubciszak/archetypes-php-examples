@@ -72,6 +72,34 @@ Flexible entity modeling pattern for managing persons and organizations with dyn
 
 [→ Read more](party/README.md)
 
+### [Pricing](pricing)
+
+Flexible pricing calculation system for financial applications.
+
+**Features:**
+- Multiple calculator types (Fixed, Interest-based)
+- Extensible calculator architecture
+- Type-safe parameter handling
+- Precise decimal calculations with brick/math
+- Repository pattern for calculator management
+- Support for various time periods (daily, monthly, yearly)
+
+**Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac, Brick Math
+
+[→ Read more](pricing/README.md)
+
+### [Quantity](quantity)
+
+Value objects for quantities and measurements with units.
+
+**Features:**
+- Money value object for financial calculations
+- Quantity with unit of measure support
+- Type-safe operations
+- Currency handling
+
+**Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac
+
 ## Development
 
 ### Requirements
@@ -142,6 +170,8 @@ See [CI Documentation](.github/workflows/README.md) for details.
 │   ├── simple-availability/
 │   └── timed-availability/
 ├── party/                  # Party archetype
+├── pricing/                # Pricing archetype
+├── quantity/               # Quantity archetype
 └── [future archetypes]/
 ```
 

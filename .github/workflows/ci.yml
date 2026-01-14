@@ -24,6 +24,10 @@ jobs:
             path: 'availability/timed-availability'
           - name: 'Party'
             path: 'party'
+          - name: 'Pricing'
+            path: 'pricing'
+          - name: 'Quantity'
+            path: 'quantity'
 
     steps:
       - name: Checkout code

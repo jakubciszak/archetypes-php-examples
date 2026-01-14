@@ -1,0 +1,7 @@
+/vendor/
+/coverage/
+.phpunit.result.cache
+.phpunit.cache/
+.phpstan.cache/
+.deptrac.cache
+composer.lock
