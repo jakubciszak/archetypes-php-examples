@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Availability\TimedAvailability;
 
-final class InMemoryResourceAvailabilityRepository implements ResourceAvailabilityRepository, ResourceAvailabilityReadModel
+final class InMemoryResourceAvailabilityRepository implements
+    ResourceAvailabilityRepository,
+    ResourceAvailabilityReadModel
 {
     /**
      * @var array<string, ResourceAvailability>
