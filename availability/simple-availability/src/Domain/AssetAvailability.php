@@ -143,6 +143,10 @@ class AssetAvailability
         return $this->currentLock !== null && $this->currentLock->wasMadeFor($ownerId);
     }
 
+    /**
+     * @internal For testing purposes only. Do not use in production code.
+     * This method bypasses business rules and should only be used in test fixtures.
+     */
     public function with(Lock $lock): self
     {
         $this->currentLock = $lock;

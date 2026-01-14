@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Availability\SimpleAvailability\Events;
 
+use DateTimeImmutable;
 use SoftwareArchetypes\Availability\SimpleAvailability\Domain\AssetId;
 use SoftwareArchetypes\Availability\SimpleAvailability\Domain\OwnerId;
 
@@ -13,7 +14,7 @@ final readonly class AssetUnlockingRejected extends BaseDomainEvent
 
     private function __construct(
         string $id,
-        \DateTimeImmutable $occurredAt,
+        DateTimeImmutable $occurredAt,
         private AssetId $assetId,
         private OwnerId $ownerId,
         private string $reason

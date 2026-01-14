@@ -16,13 +16,6 @@ class MoneyTest extends TestCase
         $this->assertEquals(100, $money->amount());
     }
 
-    public function testCanCreateMoneyWithFloatAmount(): void
-    {
-        $money = Money::of(100.50);
-
-        $this->assertEquals(100.50, $money->amount());
-    }
-
     public function testCanCreateZeroMoney(): void
     {
         $money = Money::zero();

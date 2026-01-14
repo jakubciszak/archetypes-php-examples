@@ -32,7 +32,7 @@ composer require software-archetypes/timed-availability
 The main domain aggregate managing temporal access to resources:
 
 ```php
-$availability = new ResourceAvailability(
+$availability = ResourceAvailability::withoutParent(
     ResourceAvailabilityId::newOne(),
     $resourceId,
     $timeSlot

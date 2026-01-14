@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Availability\TimedAvailability;
 
-final class InMemoryResourceAvailabilityRepository implements ResourceAvailabilityRepository
+final class InMemoryResourceAvailabilityRepository implements
+    ResourceAvailabilityRepository,
+    ResourceAvailabilityReadModel
 {
     /**
      * @var array<string, ResourceAvailability>
@@ -105,5 +107,39 @@ final class InMemoryResourceAvailabilityRepository implements ResourceAvailabili
         }
 
         return new ResourceGroupedAvailability([]);
+    }
+
+    public function load(ResourceId $resourceId, TimeSlot $timeSlot): Calendar
+    {
+        $availabilities = $this->loadAllWithinSlot($resourceId, $timeSlot);
+
+        // Group time slots by owner
+        /** @var array<string, list<TimeSlot>> $slotsByOwner */
+        $slotsByOwner = [];
+
+        foreach ($availabilities as $availability) {
+            $owner = $availability->blockedBy();
+            $key = $owner->byNone() ? 'none' : ($owner->id()?->toString() ?? 'none');
+
+            if (!isset($slotsByOwner[$key])) {
+                $slotsByOwner[$key] = [];
+            }
+
+            $slotsByOwner[$key][] = $availability->segment();
+        }
+
+        return new Calendar($resourceId, $slotsByOwner);
+    }
+
+    /**
+     * @param list<ResourceId> $resourceIds
+     */
+    public function loadAll(array $resourceIds, TimeSlot $timeSlot): Calendars
+    {
+        $calendars = [];
+        foreach ($resourceIds as $resourceId) {
+            $calendars[] = $this->load($resourceId, $timeSlot);
+        }
+        return Calendars::of($calendars);
     }
 }

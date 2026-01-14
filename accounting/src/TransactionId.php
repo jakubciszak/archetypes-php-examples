@@ -23,7 +23,7 @@ final readonly class TransactionId
 
     public static function generate(): self
     {
-        return new self(uniqid('txn_', true));
+        return new self('txn_' . bin2hex(random_bytes(16)));
     }
 
     public function toString(): string

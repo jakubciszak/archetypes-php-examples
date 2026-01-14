@@ -4,14 +4,21 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Accounting;
 
+/**
+ * Represents money using integer arithmetic (amount in cents/smallest currency unit).
+ * This avoids floating-point precision issues in financial calculations.
+ */
 final readonly class Money
 {
     private function __construct(
-        private int|float $amount,
+        private int $amount,
     ) {
     }
 
-    public static function of(int|float $amount): self
+    /**
+     * Creates a Money instance with the given amount in cents.
+     */
+    public static function of(int $amount): self
     {
         return new self($amount);
     }
@@ -21,7 +28,10 @@ final readonly class Money
         return new self(0);
     }
 
-    public function amount(): int|float
+    /**
+     * Returns the amount in cents (smallest currency unit).
+     */
+    public function amount(): int
     {
         return $this->amount;
     }
@@ -43,7 +53,7 @@ final readonly class Money
 
     public function isZero(): bool
     {
-        return $this->amount === 0 || $this->amount === 0.0;
+        return $this->amount === 0;
     }
 
     public function isPositive(): bool
