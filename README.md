@@ -88,6 +88,24 @@ Flexible pricing calculation system for financial applications.
 
 [→ Read more](pricing/README.md)
 
+### [Product](product)
+
+Comprehensive product catalog and instance management with features and tracking.
+
+**Features:**
+- Product type definitions with configurable features
+- Multiple tracking strategies (serial numbers, batches, or both)
+- Dynamic feature system with constraint validation
+- Support for GTIN, ISBN, UUID identifiers
+- Serial number validation (IMEI, VIN, custom formats)
+- Batch management with production and expiry dates
+- Builder pattern for complex object construction
+- Clean architecture with DDD principles
+
+**Tech Stack:** PHP 8.4, PHPUnit, PHPStan (level max), Deptrac, Brick Math
+
+[→ Read more](product/README.md)
+
 ### [Quantity](quantity)
 
 Value objects for quantities and measurements with units.
@@ -171,6 +189,7 @@ See [CI Documentation](.github/workflows/README.md) for details.
 │   └── timed-availability/
 ├── party/                  # Party archetype
 ├── pricing/                # Pricing archetype
+├── product/                # Product archetype
 ├── quantity/               # Quantity archetype
 └── [future archetypes]/
 ```

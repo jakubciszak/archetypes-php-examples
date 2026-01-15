@@ -1,0 +1,27 @@
+deptrac:
+  paths:
+    - ./src
+  exclude_files:
+    - '#.*test.*#i'
+  layers:
+    - name: Application
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Product\\Application\\.*
+    - name: Core
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Product\\(ProductType|ProductInstance|ProductInstanceId|ProductFeatureType|ProductFeatureTypes|ProductFeatureInstance|ProductFeatureInstances|FeatureValueType|FeatureValueConstraint|.*Constraint|ProductIdentifier|.*ProductIdentifier|SerialNumber|.*SerialNumber|Batch|BatchId|BatchName|ProductName|ProductDescription|ProductTrackingStrategy|Validity|ProductTypeRepository|CatalogEntry|CatalogEntryId|CatalogEntryRepository)
+    - name: Infrastructure
+      collectors:
+        - type: classLike
+          value: SoftwareArchetypes\\Product\\Infrastructure\\.*
+  ruleset:
+    Application:
+      - Core
+      - Infrastructure
+    Core:
+      []
+    Infrastructure:
+      - Core
+  skip_violations: []
