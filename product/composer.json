@@ -1,0 +1,78 @@
+{
+    "name": "software-archetypes/product",
+    "description": "Product pattern implementation in PHP - Port from Software Archetypes Java project",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "ddd",
+        "domain-driven-design",
+        "product",
+        "software-archetypes",
+        "aggregate",
+        "catalog",
+        "inventory",
+        "features"
+    ],
+    "authors": [
+        {
+            "name": "Software Archetypes PHP",
+            "email": "info@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "ramsey/uuid": "^4.7",
+        "brick/math": "^0.12"
+    },
+    "require-dev": {
+        "deptrac/deptrac": "^3.0",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^2.0",
+        "phpunit/phpunit": "^11.0",
+        "squizlabs/php_codesniffer": "^3.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "SoftwareArchetypes\\Product\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SoftwareArchetypes\\Product\\Tests\\": "tests/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../quantity"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    },
+    "scripts": {
+        "test": "phpunit --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test:unit": "phpunit --testsuite=unit --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test:integration": "phpunit --testsuite=integration --no-coverage --do-not-fail-on-phpunit-deprecation",
+        "test-coverage": "phpunit --coverage-html coverage",
+        "phpcs": "phpcs --standard=../.dev/phpcs.xml src tests",
+        "phpcs-fix": "phpcbf --standard=../.dev/phpcs.xml src tests",
+        "phpstan": "phpstan analyse",
+        "deptrac": "deptrac analyse --config-file=deptrac.yaml",
+        "cs-fix": "php-cs-fixer fix",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "ci": [
+            "@phpcs",
+            "@phpstan",
+            "@deptrac",
+            "@test:unit",
+            "@test:integration"
+        ]
+    }
+}

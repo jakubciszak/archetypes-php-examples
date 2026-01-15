@@ -26,6 +26,8 @@ jobs:
             path: 'party'
           - name: 'Pricing'
             path: 'pricing'
+          - name: 'Product'
+            path: 'product'
           - name: 'Quantity'
             path: 'quantity'
 

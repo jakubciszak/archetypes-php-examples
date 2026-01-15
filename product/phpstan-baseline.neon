@@ -1,0 +1,31 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Instanceof between SoftwareArchetypes\\Product\\Feature\\ProductFeatureInstance and SoftwareArchetypes\\Product\\Feature\\ProductFeatureInstance will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Feature/ProductFeatureInstances.php
+
+		-
+			message: '#^Instanceof between SoftwareArchetypes\\Product\\Feature\\ProductFeatureType and SoftwareArchetypes\\Product\\Feature\\ProductFeatureType will always evaluate to true\.$#'
+			identifier: instanceof.alwaysTrue
+			count: 1
+			path: src/Feature/ProductFeatureTypes.php
+
+		-
+			message: '#^Cannot cast mixed to string\.$#'
+			identifier: cast.string
+			count: 3
+			path: src/FeatureValueType.php
+
+		-
+			message: '#^Parameter \#1 \$instances of class SoftwareArchetypes\\Product\\Feature\\ProductFeatureInstances constructor expects array\<SoftwareArchetypes\\Product\\Feature\\ProductFeatureInstance\>, array\<int, string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Domain/Feature/ProductFeatureInstancesTest.php
+
+		-
+			message: '#^Parameter \#1 \$types of class SoftwareArchetypes\\Product\\Feature\\ProductFeatureTypes constructor expects array\<SoftwareArchetypes\\Product\\Feature\\ProductFeatureType\>, array\<int, string\> given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/Domain/Feature/ProductFeatureTypesTest.php
