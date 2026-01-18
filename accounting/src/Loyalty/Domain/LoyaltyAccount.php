@@ -4,51 +4,70 @@ declare(strict_types=1);
 
 namespace SoftwareArchetypes\Accounting\Loyalty\Domain;
 
-use DateTimeImmutable;
-use SoftwareArchetypes\Accounting\Loyalty\Events\LoyaltyEvent;
-use SoftwareArchetypes\Accounting\Loyalty\Events\PointsActivated;
-use SoftwareArchetypes\Accounting\Loyalty\Events\PointsEarned;
-use SoftwareArchetypes\Accounting\Loyalty\Events\PointsReversed;
-use SoftwareArchetypes\Accounting\Loyalty\Events\PromotionalPointsAwarded;
-use SoftwareArchetypes\Accounting\Money;
+use SoftwareArchetypes\Accounting\Loyalty\Domain\PostingRules\PostingRule;
 
 /**
  * LoyaltyAccount is the aggregate root for loyalty program management.
  *
- * Based on the Accounting archetype pattern, it manages:
- * - Active points (ready to use)
- * - Pending points (awaiting activation after return period)
- * - Purchase history
- * - Promotional bonuses
+ * Based on the Accounting archetype pattern from "Software Archetypes" (Chapter 7).
+ *
+ * This implements a full entry-based ledger system with:
+ * - Hierarchical sub-accounts
+ * - Immutable entries
+ * - Balance calculation from entries
+ * - Transaction processing via PostingRules
+ *
+ * Account Hierarchy:
+ * LoyaltyAccount (root)
+ * ├── PendingFromPurchases
+ * ├── PendingFromPromos
+ * ├── ActivePoints
+ * ├── SpentPoints
+ * ├── ExpiredPoints
+ * ├── ReversedPoints
+ * └── AdjustmentPoints
  */
 final class LoyaltyAccount
 {
-    private Points $activePoints;
+    /**
+     * @var array<string, Account>
+     */
+    private array $accounts = [];
 
     /**
-     * @var array<string, PendingPoints>
+     * @var list<PostingRule>
      */
-    private array $pendingPoints = [];
+    private array $postingRules = [];
 
     /**
-     * @var list<LoyaltyEvent>
+     * @var list<Transaction>
      */
-    private array $pendingEvents = [];
+    private array $pendingTransactions = [];
 
     private function __construct(
         private readonly LoyaltyAccountId $accountId,
         private readonly string $customerId,
         private readonly string $customerName,
+        private readonly AccountingPractice $accountingPractice,
     ) {
-        $this->activePoints = Points::zero();
+        $this->initializeAccounts();
     }
 
     public static function create(
         LoyaltyAccountId $accountId,
         string $customerId,
         string $customerName,
+        AccountingPractice $accountingPractice,
     ): self {
-        return new self($accountId, $customerId, $customerName);
+        return new self($accountId, $customerId, $customerName, $accountingPractice);
+    }
+
+    private function initializeAccounts(): void
+    {
+        // Initialize all sub-accounts
+        foreach (AccountType::cases() as $type) {
+            $this->accounts[$type->value] = Account::create($type);
+        }
     }
 
     public function id(): LoyaltyAccountId
@@ -66,183 +85,199 @@ final class LoyaltyAccount
         return $this->customerName;
     }
 
+    public function accountingPractice(): AccountingPractice
+    {
+        return $this->accountingPractice;
+    }
+
+    /**
+     * Register a posting rule for processing transactions.
+     */
+    public function registerPostingRule(PostingRule $rule): void
+    {
+        $this->postingRules[] = $rule;
+    }
+
+    /**
+     * Process a transaction using registered posting rules.
+     *
+     * This is the KEY method that implements the Accounting archetype pattern:
+     * Transaction → PostingRule → Entries → Updated Balances
+     */
+    public function processTransaction(Transaction $transaction): void
+    {
+        foreach ($this->postingRules as $rule) {
+            if ($rule->canProcess($transaction)) {
+                $rule->process($transaction, $this);
+                $this->pendingTransactions[] = $transaction;
+                return;
+            }
+        }
+
+        throw new \RuntimeException(
+            sprintf(
+                'No posting rule found for transaction type: %s',
+                $transaction->type()
+            )
+        );
+    }
+
+    /**
+     * Add an entry to a specific account.
+     *
+     * This is called by PostingRules.
+     */
+    public function addEntry(Entry $entry): void
+    {
+        $accountType = $entry->accountType();
+
+        if (!isset($this->accounts[$accountType->value])) {
+            throw new \InvalidArgumentException(
+                sprintf('Account type %s does not exist', $accountType->value)
+            );
+        }
+
+        $this->accounts[$accountType->value]->addEntry($entry);
+    }
+
+    /**
+     * Get a specific sub-account.
+     */
+    public function account(AccountType $type): Account
+    {
+        if (!isset($this->accounts[$type->value])) {
+            throw new \InvalidArgumentException(
+                sprintf('Account type %s does not exist', $type->value)
+            );
+        }
+
+        return $this->accounts[$type->value];
+    }
+
+    /**
+     * Get balance of a specific account.
+     */
+    public function balance(AccountType $type): Points
+    {
+        return $this->account($type)->balance();
+    }
+
+    /**
+     * Get balance of active points (ready to use).
+     */
     public function activePoints(): Points
     {
-        return $this->activePoints;
+        return $this->balance(AccountType::ACTIVE_POINTS);
     }
 
+    /**
+     * Get total pending points (from purchases and promos).
+     */
     public function totalPendingPoints(): Points
     {
-        $total = Points::zero();
-        foreach ($this->pendingPoints as $pending) {
-            if (!$pending->isReversed() && !$pending->isActivated()) {
-                $total = $total->add($pending->points());
-            }
-        }
-        return $total;
+        $fromPurchases = $this->balance(AccountType::PENDING_FROM_PURCHASES);
+        $fromPromos = $this->balance(AccountType::PENDING_FROM_PROMOS);
+
+        return $fromPurchases->add($fromPromos);
     }
 
     /**
-     * @return list<PendingPoints>
+     * Get balance of spent points.
      */
-    public function pendingPointsList(): array
+    public function spentPoints(): Points
     {
-        return array_values($this->pendingPoints);
+        return $this->balance(AccountType::SPENT_POINTS);
     }
 
     /**
-     * Record a purchase and calculate pending points based on posting rule.
+     * Get balance of expired points.
      */
-    public function recordPurchase(
-        PurchaseId $purchaseId,
-        Money $purchaseAmount,
-        PostingRule $postingRule,
-        DateTimeImmutable $purchaseDate,
-    ): void {
-        // Calculate points based on posting rule
-        $points = $postingRule->calculatePoints($purchaseAmount);
-
-        if ($points->isZero()) {
-            return; // No points to award
-        }
-
-        // Calculate activation date based on return period
-        $activationDate = $purchaseDate->modify(
-            sprintf('+%d days', $postingRule->returnPeriodDays())
-        );
-
-        // Create pending points
-        $pending = PendingPoints::forPurchase(
-            $purchaseId,
-            $points,
-            $purchaseDate,
-            $activationDate,
-            sprintf('Purchase in %s', $postingRule->marketName()),
-        );
-
-        $this->pendingPoints[$purchaseId->toString()] = $pending;
-
-        // Record event
-        $this->pendingEvents[] = new PointsEarned(
-            $this->accountId,
-            $purchaseId,
-            $points,
-            $purchaseDate,
-            $activationDate,
-            $postingRule->marketId(),
-        );
-    }
-
-    /**
-     * Award promotional bonus points.
-     */
-    public function awardPromotionalPoints(
-        PromotionalAction $action,
-        DateTimeImmutable $awardDate,
-    ): void {
-        if (!$action->isApplicable($awardDate)) {
-            throw new \InvalidArgumentException('Promotional action is not applicable on this date');
-        }
-
-        $bonusPoints = $action->calculateBonusPoints();
-
-        if ($bonusPoints->isZero()) {
-            return;
-        }
-
-        // Promotional points are immediately active (no pending period)
-        $this->activePoints = $this->activePoints->add($bonusPoints);
-
-        $this->pendingEvents[] = new PromotionalPointsAwarded(
-            $this->accountId,
-            $action->actionId(),
-            $action->description(),
-            $bonusPoints,
-            $awardDate,
-        );
-    }
-
-    /**
-     * Activate pending points that have passed their activation date.
-     */
-    public function activatePendingPoints(DateTimeImmutable $currentDate): void
+    public function expiredPoints(): Points
     {
-        foreach ($this->pendingPoints as $pending) {
-            if ($pending->canActivate($currentDate)) {
-                $pending->activate();
-                $this->activePoints = $this->activePoints->add($pending->points());
-
-                $this->pendingEvents[] = new PointsActivated(
-                    $this->accountId,
-                    $pending->purchaseId(),
-                    $pending->points(),
-                    $currentDate,
-                );
-            }
-        }
+        return $this->balance(AccountType::EXPIRED_POINTS);
     }
 
     /**
-     * Reverse points for a returned purchase.
+     * Get balance of reversed points (from returns).
      */
-    public function reversePurchase(
-        PurchaseId $purchaseId,
-        DateTimeImmutable $returnDate,
-    ): void {
-        $purchaseKey = $purchaseId->toString();
-
-        if (!isset($this->pendingPoints[$purchaseKey])) {
-            throw new \InvalidArgumentException(
-                sprintf('Purchase %s not found', $purchaseId->toString())
-            );
-        }
-
-        $pending = $this->pendingPoints[$purchaseKey];
-
-        if ($pending->isActivated()) {
-            // Points already activated - deduct from active points
-            $this->activePoints = $this->activePoints->subtract($pending->points());
-        } elseif (!$pending->isReversed()) {
-            // Points still pending - just mark as reversed
-            $pending->reverse();
-        }
-
-        $this->pendingEvents[] = new PointsReversed(
-            $this->accountId,
-            $purchaseId,
-            $pending->points(),
-            $returnDate,
-        );
+    public function reversedPoints(): Points
+    {
+        return $this->balance(AccountType::REVERSED_POINTS);
     }
 
     /**
-     * Use points (e.g., for redemption).
+     * Get all entries across all accounts.
+     *
+     * @return list<Entry>
      */
-    public function usePoints(Points $points): void
+    public function allEntries(): array
     {
-        if ($this->activePoints->compareTo($points) < 0) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'Insufficient points. Available: %d, Required: %d',
-                    $this->activePoints->amount(),
-                    $points->amount()
-                )
-            );
+        $entries = [];
+        foreach ($this->accounts as $account) {
+            $entries = array_merge($entries, $account->entries());
         }
-
-        $this->activePoints = $this->activePoints->subtract($points);
+        return $entries;
     }
 
     /**
-     * @return list<LoyaltyEvent>
+     * Get all transactions processed by this account.
+     *
+     * @return list<Transaction>
      */
-    public function pendingEvents(): array
+    public function transactions(): array
     {
-        return $this->pendingEvents;
+        return $this->pendingTransactions;
     }
 
-    public function clearPendingEvents(): void
+    /**
+     * Clear pending transactions (after publishing events).
+     */
+    public function clearPendingTransactions(): void
     {
-        $this->pendingEvents = [];
+        $this->pendingTransactions = [];
+    }
+
+    /**
+     * Get entries for a specific reference (e.g., purchase_id).
+     *
+     * @return list<Entry>
+     */
+    public function entriesForReference(string $referenceId): array
+    {
+        $entries = [];
+        foreach ($this->accounts as $account) {
+            $entries = array_merge($entries, $account->entriesForReference($referenceId));
+        }
+        return $entries;
+    }
+
+    /**
+     * Get entries for a specific line item.
+     *
+     * @return list<Entry>
+     */
+    public function entriesForLineItem(string $lineItemId): array
+    {
+        $entries = [];
+        foreach ($this->accounts as $account) {
+            $entries = array_merge($entries, $account->entriesForLineItem($lineItemId));
+        }
+        return $entries;
+    }
+
+    /**
+     * Calculate points balance for a specific reference across all accounts.
+     */
+    public function balanceForReference(string $referenceId, AccountType $accountType): Points
+    {
+        return $this->account($accountType)->balanceForReference($referenceId);
+    }
+
+    /**
+     * Calculate points balance for a specific line item.
+     */
+    public function balanceForLineItem(string $lineItemId, AccountType $accountType): Points
+    {
+        return $this->account($accountType)->balanceForLineItem($lineItemId);
     }
 }

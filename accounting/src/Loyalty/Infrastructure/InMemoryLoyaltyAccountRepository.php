@@ -15,9 +15,19 @@ final class InMemoryLoyaltyAccountRepository implements LoyaltyAccountRepository
      */
     private array $accounts = [];
 
+    /**
+     * @var array<string, string> customer_id => account_id
+     */
+    private array $customerIndex = [];
+
     public function save(LoyaltyAccount $account): LoyaltyAccount
     {
-        $this->accounts[$account->id()->toString()] = $account;
+        $accountId = $account->id()->toString();
+        $customerId = $account->customerId();
+
+        $this->accounts[$accountId] = $account;
+        $this->customerIndex[$customerId] = $accountId;
+
         return $account;
     }
 
@@ -28,17 +38,15 @@ final class InMemoryLoyaltyAccountRepository implements LoyaltyAccountRepository
 
     public function findByCustomerId(string $customerId): ?LoyaltyAccount
     {
-        foreach ($this->accounts as $account) {
-            if ($account->customerId() === $customerId) {
-                return $account;
-            }
+        $accountId = $this->customerIndex[$customerId] ?? null;
+
+        if ($accountId === null) {
+            return null;
         }
-        return null;
+
+        return $this->accounts[$accountId] ?? null;
     }
 
-    /**
-     * @return list<LoyaltyAccount>
-     */
     public function findAll(): array
     {
         return array_values($this->accounts);

@@ -6,16 +6,20 @@ namespace SoftwareArchetypes\Accounting\Loyalty\Domain;
 
 /**
  * Represents loyalty points using integer arithmetic.
- * Points are always positive or zero.
+ *
+ * In an entry-based ledger system, Points can be negative to represent
+ * reversals, deductions, and contra-entries (debits/credits).
+ *
+ * For example:
+ * - Earning points: +100
+ * - Spending points: -100
+ * - Reversing a transaction: negative of original amount
  */
 final readonly class Points
 {
     private function __construct(
         private int $amount,
     ) {
-        if ($amount < 0) {
-            throw new \InvalidArgumentException('Points amount cannot be negative');
-        }
     }
 
     public static function of(int $amount): self
@@ -40,9 +44,6 @@ final readonly class Points
 
     public function subtract(self $other): self
     {
-        if ($this->amount < $other->amount) {
-            throw new \InvalidArgumentException('Cannot subtract more points than available');
-        }
         return new self($this->amount - $other->amount);
     }
 
