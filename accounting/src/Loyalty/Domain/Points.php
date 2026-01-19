@@ -2,21 +2,25 @@
 
 declare(strict_types=1);
 
-namespace SoftwareArchetypes\Accounting;
+namespace SoftwareArchetypes\Accounting\Loyalty\Domain;
 
 /**
- * Represents money using integer arithmetic (amount in cents/smallest currency unit).
- * This avoids floating-point precision issues in financial calculations.
+ * Represents loyalty points using integer arithmetic.
+ *
+ * In an entry-based ledger system, Points can be negative to represent
+ * reversals, deductions, and contra-entries (debits/credits).
+ *
+ * For example:
+ * - Earning points: +100
+ * - Spending points: -100
+ * - Reversing a transaction: negative of original amount
  */
-final readonly class Money
+final readonly class Points
 {
     private function __construct(
         private int $amount,
     ) {}
 
-    /**
-     * Creates a Money instance with the given amount in cents.
-     */
     public static function of(int $amount): self
     {
         return new self($amount);
@@ -27,9 +31,6 @@ final readonly class Money
         return new self(0);
     }
 
-    /**
-     * Returns the amount in cents (smallest currency unit).
-     */
     public function amount(): int
     {
         return $this->amount;
@@ -45,11 +46,6 @@ final readonly class Money
         return new self($this->amount - $other->amount);
     }
 
-    public function negate(): self
-    {
-        return new self(-$this->amount);
-    }
-
     public function isZero(): bool
     {
         return $this->amount === 0;
@@ -60,11 +56,6 @@ final readonly class Money
         return $this->amount > 0;
     }
 
-    public function isNegative(): bool
-    {
-        return $this->amount < 0;
-    }
-
     public function equals(self $other): bool
     {
         return $this->amount === $other->amount;
@@ -73,5 +64,15 @@ final readonly class Money
     public function compareTo(self $other): int
     {
         return $this->amount <=> $other->amount;
+    }
+
+    public function greaterThan(self $other): bool
+    {
+        return $this->amount > $other->amount;
+    }
+
+    public function greaterThanOrEqual(self $other): bool
+    {
+        return $this->amount >= $other->amount;
     }
 }

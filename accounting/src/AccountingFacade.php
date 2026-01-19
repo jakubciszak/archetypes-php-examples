@@ -23,8 +23,7 @@ final readonly class AccountingFacade
     public function __construct(
         private AccountRepository $accountRepository,
         private EventsPublisher $eventsPublisher,
-    ) {
-    }
+    ) {}
 
     public function createAccount(
         AccountId $accountId,
