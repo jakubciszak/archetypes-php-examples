@@ -19,8 +19,7 @@ final readonly class Points
 {
     private function __construct(
         private int $amount,
-    ) {
-    }
+    ) {}
 
     public static function of(int $amount): self
     {

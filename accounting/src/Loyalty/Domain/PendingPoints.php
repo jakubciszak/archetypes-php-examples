@@ -23,8 +23,7 @@ final class PendingPoints
         private readonly DateTimeImmutable $purchaseDate,
         private readonly DateTimeImmutable $activationDate,
         private readonly string $reason,
-    ) {
-    }
+    ) {}
 
     public static function forPurchase(
         PurchaseId $purchaseId,

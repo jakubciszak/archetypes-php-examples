@@ -69,6 +69,9 @@ final readonly class MaturationPeriodExpired implements Transaction
         return 'maturation_period_expired';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

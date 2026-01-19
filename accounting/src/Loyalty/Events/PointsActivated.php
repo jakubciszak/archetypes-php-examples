@@ -16,8 +16,7 @@ final readonly class PointsActivated implements LoyaltyEvent
         private PurchaseId $purchaseId,
         private Points $points,
         private DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 
     public function accountId(): LoyaltyAccountId
     {

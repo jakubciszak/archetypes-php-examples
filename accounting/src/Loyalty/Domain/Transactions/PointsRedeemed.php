@@ -17,16 +17,18 @@ use SoftwareArchetypes\Accounting\Loyalty\Domain\Transaction;
  */
 final readonly class PointsRedeemed implements Transaction
 {
+    /**
+     * @param array<string, mixed> $metadata
+     */
     public function __construct(
         private string $transactionId,
         private string $customerId,
         private Points $points,
         private string $redemptionId,
-        private string $redemptionType, // e.g., 'voucher', 'discount', 'reward'
+        private string $redemptionType,
         private DateTimeImmutable $occurredAt,
         private array $metadata = [],
-    ) {
-    }
+    ) {}
 
     public function transactionId(): string
     {
@@ -58,6 +60,9 @@ final readonly class PointsRedeemed implements Transaction
         return $this->occurredAt;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function metadata(): array
     {
         return $this->metadata;
@@ -68,6 +73,9 @@ final readonly class PointsRedeemed implements Transaction
         return 'points_redeemed';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

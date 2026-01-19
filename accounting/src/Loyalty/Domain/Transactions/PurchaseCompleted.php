@@ -28,8 +28,7 @@ final readonly class PurchaseCompleted implements Transaction
         private array $lineItems,
         private MarketId $marketId,
         private DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 
     public function transactionId(): string
     {
@@ -54,6 +53,9 @@ final readonly class PurchaseCompleted implements Transaction
     /**
      * @return array<string, array{lineItemId: string, amount: Money, productId: string}>
      */
+    /**
+     * @return array<string, array{lineItemId: string, amount: Money, productId: string}>
+     */
     public function lineItems(): array
     {
         return $this->lineItems;
@@ -74,6 +76,9 @@ final readonly class PurchaseCompleted implements Transaction
         return 'purchase_completed';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

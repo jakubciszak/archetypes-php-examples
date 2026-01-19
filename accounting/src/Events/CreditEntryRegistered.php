@@ -18,6 +18,5 @@ final readonly class CreditEntryRegistered implements AccountingEvent
         public AccountId $accountId,
         public Money $amount,
         public DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 }

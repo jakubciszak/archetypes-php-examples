@@ -21,6 +21,9 @@ use SoftwareArchetypes\Accounting\Loyalty\Domain\Transaction;
  */
 final readonly class PromotionAwarded implements Transaction
 {
+    /**
+     * @param array<string, mixed> $metadata
+     */
     public function __construct(
         private string $transactionId,
         private string $customerId,
@@ -28,11 +31,10 @@ final readonly class PromotionAwarded implements Transaction
         private string $promotionType,
         private Points $bonusPoints,
         private bool $immediateActivation,
-        private ?string $referenceId, // e.g., purchase_id for product bonus
+        private ?string $referenceId,
         private DateTimeImmutable $occurredAt,
         private array $metadata = [],
-    ) {
-    }
+    ) {}
 
     public function transactionId(): string
     {
@@ -74,6 +76,9 @@ final readonly class PromotionAwarded implements Transaction
         return $this->occurredAt;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function metadata(): array
     {
         return $this->metadata;
@@ -84,6 +89,9 @@ final readonly class PromotionAwarded implements Transaction
         return 'promotion_awarded';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

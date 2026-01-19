@@ -22,8 +22,7 @@ final readonly class ProductBonusAction implements PromotionalAction
         private Points $bonusPoints,
         private DateTimeImmutable $validFrom,
         private DateTimeImmutable $validTo,
-    ) {
-    }
+    ) {}
 
     public static function create(
         string $actionId,

@@ -25,8 +25,7 @@ final readonly class ReturnAccepted implements Transaction
         private string $customerId,
         private array $lineItemIds,
         private DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 
     public function transactionId(): string
     {
@@ -61,6 +60,9 @@ final readonly class ReturnAccepted implements Transaction
         return 'return_accepted';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

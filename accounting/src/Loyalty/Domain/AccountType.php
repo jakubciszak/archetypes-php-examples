@@ -33,7 +33,7 @@ enum AccountType: string
 
     public function isDebit(): bool
     {
-        return match($this) {
+        return match ($this) {
             self::PENDING_FROM_PURCHASES,
             self::PENDING_FROM_PROMOS,
             self::ACTIVE_POINTS => true,
@@ -46,7 +46,7 @@ enum AccountType: string
 
     public function displayName(): string
     {
-        return match($this) {
+        return match ($this) {
             self::PENDING_FROM_PURCHASES => 'Pending from Purchases',
             self::PENDING_FROM_PROMOS => 'Pending from Promotions',
             self::ACTIVE_POINTS => 'Active Points',

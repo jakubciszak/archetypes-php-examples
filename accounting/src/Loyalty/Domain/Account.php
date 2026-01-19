@@ -24,8 +24,7 @@ final class Account
 
     private function __construct(
         private readonly AccountType $type,
-    ) {
-    }
+    ) {}
 
     public static function create(AccountType $type): self
     {

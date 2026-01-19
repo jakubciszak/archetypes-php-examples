@@ -16,8 +16,7 @@ final readonly class PromotionalPointsAwarded implements LoyaltyEvent
         private string $description,
         private Points $points,
         private DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 
     public function accountId(): LoyaltyAccountId
     {

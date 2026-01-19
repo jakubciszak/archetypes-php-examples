@@ -8,8 +8,7 @@ final readonly class LoyaltyAccountId
 {
     private function __construct(
         private string $id,
-    ) {
-    }
+    ) {}
 
     public static function fromString(string $id): self
     {

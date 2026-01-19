@@ -22,6 +22,9 @@ use SoftwareArchetypes\Accounting\Money;
  */
 final readonly class AccountingPractice
 {
+    /**
+     * @param array<string, float> $promotionalMultipliers
+     */
     public function __construct(
         private MarketId $marketId,
         private string $marketName,
@@ -29,7 +32,7 @@ final readonly class AccountingPractice
         private int $maturationPeriodDays,
         private int $pointsExpirationDays,
         private bool $roundDown,
-        private array $promotionalMultipliers = [], // e.g., ['SKU-123' => 2.0]
+        private array $promotionalMultipliers = [],
     ) {
         if ($pointsPerCurrencyUnit <= 0) {
             throw new \InvalidArgumentException('Points per currency unit must be positive');
@@ -42,6 +45,9 @@ final readonly class AccountingPractice
         }
     }
 
+    /**
+     * @param array<string, float> $promotionalMultipliers
+     */
     public static function forMarket(
         MarketId $marketId,
         string $marketName,
@@ -105,8 +111,8 @@ final readonly class AccountingPractice
         $rawPoints = $mainUnits * $this->pointsPerCurrencyUnit;
 
         // Apply promotional multiplier if applicable
-        if ($productId && isset($this->promotionalMultipliers[$productId])) {
-            $rawPoints *= $this->promotionalMultipliers[$productId];
+        if ($productId) {
+            $rawPoints *= $this->promotionalMultiplier($productId);
         }
 
         // Apply rounding

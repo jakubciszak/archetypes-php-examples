@@ -188,7 +188,7 @@ final class LoyaltyAccountWorkflowTest extends TestCase
             'PURCH-PL',
             'CUST-001',
             $amount,
-            [['lineItemId' => 'L1', 'amount' => $amount, 'productId' => 'P1']],
+            ['item1' => ['lineItemId' => 'L1', 'amount' => $amount, 'productId' => 'P1']],
             MarketId::fromString('PL'),
             new DateTimeImmutable('2024-01-01')
         );
@@ -199,7 +199,7 @@ final class LoyaltyAccountWorkflowTest extends TestCase
             'PURCH-DE',
             'CUST-001',
             $amount,
-            [['lineItemId' => 'L1', 'amount' => $amount, 'productId' => 'P1']],
+            ['item1' => ['lineItemId' => 'L1', 'amount' => $amount, 'productId' => 'P1']],
             MarketId::fromString('DE'),
             new DateTimeImmutable('2024-01-01')
         );
@@ -235,7 +235,7 @@ final class LoyaltyAccountWorkflowTest extends TestCase
             'PURCH-001',
             'CUST-001',
             Money::of(10000),
-            [['lineItemId' => 'L1', 'amount' => Money::of(10000), 'productId' => 'P1']],
+            ['item1' => ['lineItemId' => 'L1', 'amount' => Money::of(10000), 'productId' => 'P1']],
             MarketId::fromString('PL'),
             new DateTimeImmutable('2024-01-01')
         );

@@ -26,6 +26,8 @@ interface Transaction
 
     /**
      * Get all data needed for posting rules.
+     *
+     * @return array<string, mixed>
      */
     public function data(): array;
 }

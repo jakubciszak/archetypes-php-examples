@@ -19,8 +19,7 @@ final readonly class PointsEarned implements LoyaltyEvent
         private DateTimeImmutable $occurredAt,
         private DateTimeImmutable $activationDate,
         private MarketId $marketId,
-    ) {
-    }
+    ) {}
 
     public function accountId(): LoyaltyAccountId
     {

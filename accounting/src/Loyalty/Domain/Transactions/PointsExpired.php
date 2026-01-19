@@ -24,8 +24,7 @@ final readonly class PointsExpired implements Transaction
         private string $customerId,
         private array $entryIds,
         private DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 
     public function transactionId(): string
     {
@@ -55,6 +54,9 @@ final readonly class PointsExpired implements Transaction
         return 'points_expired';
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function data(): array
     {
         return [

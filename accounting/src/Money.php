@@ -12,8 +12,7 @@ final readonly class Money
 {
     private function __construct(
         private int $amount,
-    ) {
-    }
+    ) {}
 
     /**
      * Creates a Money instance with the given amount in cents.

@@ -24,6 +24,9 @@ use DateTimeImmutable;
  */
 final readonly class Entry
 {
+    /**
+     * @param array<string, mixed> $metadata
+     */
     private function __construct(
         private EntryId $id,
         private AccountType $accountType,
@@ -31,12 +34,14 @@ final readonly class Entry
         private DateTimeImmutable $effectiveDate,
         private string $transactionId,
         private string $description,
-        private ?string $referenceId, // e.g., purchase_id, promo_id
-        private ?string $lineItemId,  // for line-level allocation (partial returns)
+        private ?string $referenceId,
+        private ?string $lineItemId,
         private array $metadata,
-    ) {
-    }
+    ) {}
 
+    /**
+     * @param array<string, mixed> $metadata
+     */
     public static function create(
         EntryId $id,
         AccountType $accountType,
@@ -101,6 +106,9 @@ final readonly class Entry
         return $this->lineItemId;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function metadata(): array
     {
         return $this->metadata;
