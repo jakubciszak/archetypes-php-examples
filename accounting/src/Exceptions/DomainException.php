@@ -9,6 +9,4 @@ use Exception;
 /**
  * Base exception for all domain-specific errors in the Accounting context.
  */
-abstract class DomainException extends Exception
-{
-}
+abstract class DomainException extends Exception {}

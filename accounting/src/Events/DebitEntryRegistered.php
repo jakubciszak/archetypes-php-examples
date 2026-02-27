@@ -18,6 +18,5 @@ final readonly class DebitEntryRegistered implements AccountingEvent
         public AccountId $accountId,
         public Money $amount,
         public DateTimeImmutable $occurredAt,
-    ) {
-    }
+    ) {}
 }

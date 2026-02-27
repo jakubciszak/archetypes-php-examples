@@ -16,8 +16,7 @@ final readonly class AccountCredited implements Entry
         private DateTimeImmutable $appliesAt,
         private AccountId $accountId,
         private Money $amount,
-    ) {
-    }
+    ) {}
 
     public function id(): EntryId
     {

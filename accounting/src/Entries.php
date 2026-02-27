@@ -14,8 +14,7 @@ final class Entries
      */
     private function __construct(
         private array $entries = [],
-    ) {
-    }
+    ) {}
 
     public static function empty(): self
     {
